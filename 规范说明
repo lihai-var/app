@@ -1,0 +1,163 @@
+项目结构与规范说明
+
+一、目录结构说明
+src
+	assets			静态资源（图片、字体等）
+	common 			项目全局公共函数封装
+	components		全部组件
+		common 		通用组件，不带有任何业务数据，只带有通用样式或特定样式以及事件；以文件夹的形式隔开，如果存在资源则建立子目录存放
+		modules		业务组件，带有通用业务数据；
+	directives		全局指令 按文件名划分
+	filters			全局筛选指令
+	pages			页面容器
+		login		路由为/home的页面，该页面如果涉及子页面，则创建children目录进行存放，多级递归。注意这里多级时路由配置也需要多级配置
+			children
+				child.vue
+			index.vue
+	plugins 		js第三方插件
+	router			路由配置
+		map			各个页面对应的路由配置，注意：这里是按页面来配置
+	server			前端领域业务封装，文件名按领域来区分；测试用例针对领域来编写流程
+		testData	按领域来存放测试数据
+	store			vuex 模块
+		modules		细分各个模块
+		index		vuex入口
+	style			全局样式
+		common.less 全局公共样式
+		root.less	全局less变量		
+tests
+	e2e				端到端测试
+	unit			单元测试
+vue.config.js		工程基本配置文件-端口、编译输出目录...
+
+
+三、js规范
+变量
+1.当前作用域顶端定义
+2.var禁用 在块级作用域下使用let
+3.在全局作用域下，函数及变量使用const定义
+4.字符串统一使用单引号，标签或者属性的值采用双引号
+
+函数
+1.that=this; 函数内部存在嵌套函数时，必须在最外层定义this指向
+2.内部私有方法写在return之后
+3.判断是否相等用全等号
+
+类
+1.定义顺序：变量、公开方法、私有方法
+
+模块
+1.export default 写到最底部
+2.export 变量写在一起靠底部位置
+
+命名
+1.变量、函数、vue组件名称 小写开头 驼峰规则
+2.私有加前缀(下划线)
+3.类命名 大写开始 驼峰规则
+4.资源文件全部用小写命名（包括文件夹），如backbtn.png、 province_city.json
+
+四、css规范
+每个style标签必去加上scoped
+样式规则：
+.classname{
+	//定位规则
+
+	//盒子属性
+
+	//其它
+}
+
+classname:命名规则 小写；多个单词-（中划线）分格
+
+层级样式减少标签直接使用方式；
+层级定义样式规则：
+.父级
+	.父级-子级
+		.父级-子级-子级		
+class相隔必须用-（中划线）
+id相隔必须用_(下划线)
+
+样式封装块，重复样式定义继承处理
+.commonclassname
+
+.classname {
+	//定位规则
+
+	//盒子属性
+
+	//其它
+
+	&:伪类 {
+
+	}
+
+	// 嵌套层级
+	.classname {
+		
+	}
+
+	.classname {
+
+	}
+}
+
+五、路由规范
+	根据页面来制定路由区域
+
+六、Vue文件规范
+<template>
+	// v-on => @
+	// v-bind => :
+</template>
+<script>
+	// 模块引入
+	// 对象接口
+	export default {
+		props:{
+			// 父级传入属性 
+	  	},
+		data(){
+			return {
+				组件相关初始化数据定义
+			}
+		},	
+
+		created(){
+			// 异步装载初始化数据
+			this.methodC();
+		},
+
+		components:{
+			// 引用的组件
+
+		},
+		
+		methods:{
+			// 一些数据交互的问题
+			methodA() {
+
+			},
+			methodB() {
+
+			},
+			async methodC() {
+
+			}
+		},
+		computed:{
+			// 需要属性计算的操作
+		},
+		watch:{
+			// 检控属性变化
+		}
+	}
+</script>
+<style lang="less" scoped>
+	
+</style>
+
+
+
+
+
+

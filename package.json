@@ -1,0 +1,120 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env env_config=dev vue-cli-service serve",
+    "build": "cross-env env_config=test vue-cli-service build",
+    "build:t": "cross-env env_config=test vue-cli-service build",
+    "build:p": "cross-env env_config=prod vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "qiniu": "bash ./scripts/cdn/qiniu.sh dist",
+    "deploy": "bash ./scripts/deploy/deploy.sh dist",
+    "release": "npm run build:p && npm run qiniu && npm run deploy",
+    "server": "npm run build:t && bash ./scripts/deploy/transport_test_file.sh dist",
+    "fix": "prettier --write .",
+    "lint-staged": "lint-staged"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "core-js": "^2.6.12",
+    "crypto-js": "^3.1.9-1",
+    "swiper": "^4.5.0",
+    "vue": "^2.6.6",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1",
+    "weixin-js-sdk": "^1.4.0-test"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@vue/cli-plugin-babel": "^3.5.0",
+    "@vue/cli-plugin-eslint": "^3.5.0",
+    "@vue/cli-plugin-unit-jest": "^3.5.0",
+    "@vue/cli-service": "^3.5.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "@babel/eslint-parser": "^7.17.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "babel-plugin-component": "^1.1.1",
+    "cross-env": "^5.2.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "husky": "^4.3.0",
+    "less": "^3.0.4",
+    "less-loader": "^4.1.0",
+    "vue-loader": "^14.2.2",
+    "vue-template-compiler": "^2.5.21"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {
+      "no-undef": 0,
+      "no-console": 0,
+      "no-unused-vars": 0,
+      "indent": "off",
+      "vue/script-indent": [
+        "error",
+        2
+      ]
+    },
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.vue$": "vue-jest",
+      ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    },
+    "snapshotSerializers": [
+      "jest-serializer-vue"
+    ],
+    "testMatch": [
+      "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"
+    ],
+    "testURL": "http://localhost/"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "prettier --write .",
+      "git add"
+    ]
+  }
+}

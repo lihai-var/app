@@ -1,0 +1,50 @@
+@mainColor: #11d59c; //全局主色调
+@width: 300px;
+.widh(@w: 100px, @h: 200px) {
+  width: @w;
+  height: @h;
+}
+.lett(@l: 100px, @t: 100px) {
+  left: @l;
+  top: @t;
+}
+.bg(@color: #696) {
+  background-color: @color;
+  cursor: pointer;
+}
+.hei(@height: 30px) {
+  height: @height;
+  line-height: @height;
+}
+@box: {
+  width: @width - 100;
+  height: 200px;
+  border: solid 1px red;
+  margin: 0 auto;
+  color: @mainColor;
+};
+@absolute: {
+  position: absolute;
+  .widh(200px);
+  .lett(100px, 100px);
+  z-index: 10;
+};
+.btnBg(@bgColor: #696) {
+  transition: all 0.2s;
+  &:hover {
+    background-color: @bgColor;
+  }
+}
+.btn(@color: #696) {
+  transition: all 0.2s;
+  &:hover {
+    color: @color;
+  }
+}
+.abso(@l: 0, @t: 0, @w: 100%) {
+  position: absolute;
+  z-index: 10;
+  left: @l;
+  top: @t;
+  width: @w;
+}

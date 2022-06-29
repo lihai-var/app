@@ -1,0 +1,52 @@
+# 定义 stages
+stages:
+  - install
+  - build
+  - deploy
+
+# 每个job之前运行的命令
+before_script:
+  - whoami
+  - pwd
+
+cache:
+  key: ${CI_BUILD_REF_NAME}
+  paths:
+    - node_modules/ # 为node_modules增加缓存
+
+install:
+  stage: install
+  script:
+    - echo "======= 开始 安装依赖 ======="
+    - npm install
+    # 可以切换为淘宝镜像
+    # - npm --registry https://registry.npm.taobao.org install express
+    - echo "======= 完成 安装依赖 ======="
+  only:
+    - master
+  when: manual
+
+build:
+  stage: build
+  script:
+    - echo "======= 开始 构建 ======="
+    - npm run build:p
+    - echo "======= 结束 构建 ======="
+  artifacts:
+    expire_in: 1 week # 生成文件保存周期
+    name: '${CI_JOB_NAME}_${CI_COMMIT_REF_NAME}'
+    paths:
+      - dist # 编译后生成的文件夹名
+  only:
+    - master
+
+deploy:
+  stage: deploy
+  script:
+    - echo "======= 开始 部署 ======="
+    - npm run qiniu
+    - npm run deploy
+    - echo "======= 完成 部署 ======="
+  when: manual
+  only:
+    - master

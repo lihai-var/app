@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
+    <meta itemprop="share_url" content="url" />
+    <meta itemprop="image" content="url" />
+    <meta itemprop="share_pic_url" content="" />
+    <title>项目名</title>
+  </head>
+  <body class="adf">
+    <noscript>
+      <strong>您的浏览器版本太低，请升级之后再来访问哦~</strong>
+    </noscript>
+    <div id="app"></div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- built files will be auto injected -->
+    <% for (var i in htmlWebpackPlugin.options.cdn.js) { %>
+      <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
+    <% } %>
+  </body>
+  <!-- <script type="text/javascript" src="https://ydcommon.51yund.com/test_web_hd/vendor/vconsole.min.js"></script> -->
+</html>

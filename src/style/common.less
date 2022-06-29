@@ -1,0 +1,47 @@
+.yd-message {
+  display: table;
+  position: fixed;
+  z-index: 2001;
+  width: 80%;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  text-align: center;
+  span {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border-radius: 0.04rem;
+    padding: 0.1rem 0.12rem;
+    font-size: 0.14rem;
+    display: inline-block;
+    line-height: 0.2rem;
+    min-width: 40vw;
+  }
+}
+.fr {
+  float: right;
+}
+.arrow-r {
+  position: relative;
+  padding-right: 0.12rem;
+  &:before {
+    content: '';
+    height: 6px;
+    width: 6px;
+    border-width: 2px 2px 0 0;
+    border-color: #c8c8cd;
+    border-style: solid;
+    transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+    position: absolute;
+    top: 50%;
+    margin-top: -4px;
+    right: 0;
+  }
+}
+.container {
+  height: 100vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
